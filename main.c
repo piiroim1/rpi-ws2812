@@ -80,7 +80,7 @@ long int get_cycle_time() {
     clock_gettime(CLOCK_MONOTONIC, &t0);
     update(gpio_set, gpio_clr, 10000);
     clock_gettime(CLOCK_MONOTONIC, &t1);
-    long int dt = t1.tv_nsec - t1.tv_nsec;
+    long int dt = t1.tv_nsec - t0.tv_nsec;
     long int t_cycle = dt / n;
     printf("time for %d gpio updates (dt): %ld ns", n, dt);
     printf("time for one cycle/update (t_cycle): %ld ns", t_cycle);
