@@ -66,8 +66,6 @@ int main(int argc, char **argv)
   }
 
   long int t_cycle = get_cycle_time();
-
-  printf("t_cycle: %ld ns", t_cycle);
  
   return 0;
  
@@ -79,11 +77,13 @@ long int get_cycle_time() {
     int n = 10000;
     struct timespec t0;
     struct timespec t1;
-    long int dt;
     clock_gettime(CLOCK_MONOTONIC, &t0);
     update(gpio_set, gpio_clr, 10000);
     clock_gettime(CLOCK_MONOTONIC, &t1);
-    dt = t1.tv_nsec - t1.tv_nsec;
+    long int dt = t1.tv_nsec - t1.tv_nsec;
+    long int t_cycle = dt / n;
+    printf("time for %d gpio updates (dt): %ld ns", n, dt);
+    printf("time for one cycle/update (t_cycle): %ld ns", t_cycle);
     return dt/n;
 }
 
