@@ -41,6 +41,7 @@ volatile unsigned *gpio;
 #define GPIO_PULLCLK0 *(gpio+38) // Pull up/pull down clock
  
 void setup_io();
+inline long int get_cycle_time();
  
 int main(int argc, char **argv)
 {
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
     OUT_GPIO(g);
   }
 
-  long int t_cycle = get_cycle_time()
+  long int t_cycle = get_cycle_time();
 
   printf("t_cycle: %ld ns", t_cycle);
  
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
  
 } // main
 
-int get_cycle_time() {
+long int get_cycle_time() {
     int[10000] gpio_set = { 0 };
     int[10000] gpio_clr = { 0 };
     int n = 10000;
