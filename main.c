@@ -5,7 +5,8 @@
 #define BCM2708_PERI_BASE        0x20000000
 #define GPIO_BASE                (BCM2708_PERI_BASE + 0x200000) /* GPIO controller */
  
- 
+
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -75,8 +76,8 @@ long int get_cycle_time() {
     int gpio_set[10000] = { 0 };
     int gpio_clr[10000] = { 0 };
     int n = 10000;
-    struct timespec t0 = 0;
-    struct timespec t1 = 1;
+    struct timespec t0;
+    struct timespec t1;
     long int dt;
     clock_gettime(CLOCK_MONOTONIC, &t0);
     update(gpio_set, gpio_clr, 10000);
