@@ -75,6 +75,7 @@ long int get_cycle_time() {
     int gpio_set[10000] = { 0 };
     int gpio_clr[10000] = { 0 };
     int n = 10000;
+    printf("timing %d gpio updates...\n", n);
     struct timespec t0;
     struct timespec t1;
     clock_gettime(CLOCK_MONOTONIC, &t0);
@@ -82,8 +83,8 @@ long int get_cycle_time() {
     clock_gettime(CLOCK_MONOTONIC, &t1);
     long int dt = t1.tv_nsec - t0.tv_nsec;
     long int t_cycle = dt / n;
-    printf("time for %d gpio updates (dt): %ld ns", n, dt);
-    printf("time for one cycle/update (t_cycle): %ld ns", t_cycle);
+    printf("time for %d gpio updates (dt): %ld ns\n", n, dt);
+    printf("time for one cycle/update (t_cycle): %ld ns\n", t_cycle);
     return dt/n;
 }
 
