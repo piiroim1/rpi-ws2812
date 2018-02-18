@@ -87,7 +87,7 @@ long int get_cycle_time() {
     return dt/n;
 }
 
-inline void update(int* gpio_set; int* gpio_clr; int n) {
+inline void update(int* gpio_set, int* gpio_clr, int n) {
     for(int i; i < n; i++) {
         GPIO_SET = gpio_set[i];
         GPIO_CLR = gpio_clr[i];
