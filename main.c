@@ -38,6 +38,7 @@ volatile unsigned *gpio;
  
 void setup_io();
 inline long int get_cycle_time();
+void update(int* gpio_set, int* gpio_clr, int n);
  
 int main(int argc, char **argv)
 {
@@ -89,7 +90,7 @@ long int get_cycle_time() {
 inline void update(int* gpio_set; int* gpio_clr; int n) {
     for(int i; i < n; i++) {
         GPIO_SET = gpio_set[i];
-        GPIO_CLEAR = gpio_clear[i];
+        GPIO_CLR = gpio_clr[i];
     }
 }
  
