@@ -1,10 +1,5 @@
-//
-//  How to access GPIO registers from C-code on the Raspberry-Pi
-//  Example program
-//  15-January-2012
-//  Dom and Gert
-//  Revised: 15-Feb-2013
- 
+// Modified from https://github.com/jgarff/rpi_ws281x
+
 // Access from ARM Running Linux
  
 #define BCM2708_PERI_BASE        0x20000000
@@ -77,8 +72,8 @@ int main(int argc, char **argv)
 } // main
 
 long int get_cycle_time() {
-    int[10000] gpio_set = { 0 };
-    int[10000] gpio_clr = { 0 };
+    int gpio_set[10000] = { 0 };
+    int gpio_clr[10000] = { 0 };
     int n = 10000;
     struct timespec t0 = 0;
     struct timespec t1 = 1;
