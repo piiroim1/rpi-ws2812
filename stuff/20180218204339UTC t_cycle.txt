@@ -1,0 +1,55 @@
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 664128 nstime for one cycle/update (t_cycle): 66 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 676835 nstime for one cycle/update (t_cycle): 67 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 671105 nstime for one cycle/update (t_cycle): 67 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 647719 nstime for one cycle/update (t_cycle): 64 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 639021 nstime for one cycle/update (t_cycle): 63 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 643499 nstime for one cycle/update (t_cycle): 64 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 325057 nstime for one cycle/update (t_cycle): 32 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 648706 nstime for one cycle/update (t_cycle): 64 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 657248 nstime for one cycle/update (t_cycle): 65 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 760687 nstime for one cycle/update (t_cycle): 76 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 653913 nstime for one cycle/update (t_cycle): 65 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 653496 nstime for one cycle/update (t_cycle): 65 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 643757 nstime for one cycle/update (t_cycle): 64 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 644121 nstime for one cycle/update (t_cycle): 64 ns
+sudo: unable to resolve host ZeroTwo
+time for 10000 gpio updates (dt): 643443 nstime for one cycle/update (t_cycle): 64 ns
+time for 10000 gpio updates (dt): 641672 nstime for one cycle/update (t_cycle): 64 ns
+time for 10000 gpio updates (dt): 323128 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 325576 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 323596 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 329482 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 678856 nstime for one cycle/update (t_cycle): 67 ns
+time for 10000 gpio updates (dt): 646616 nstime for one cycle/update (t_cycle): 64 ns
+time for 10000 gpio updates (dt): 320052 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 329584 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 325990 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 321095 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 321251 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 320105 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 319532 nstime for one cycle/update (t_cycle): 31 ns
+time for 10000 gpio updates (dt): 320730 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 320157 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 322710 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 321459 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 324897 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 320470 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 320626 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 320053 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 321251 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 320313 nstime for one cycle/update (t_cycle): 32 ns
+time for 10000 gpio updates (dt): 322292 nstime for one cycle/update (t_cycle): 32 ns
