@@ -40,11 +40,12 @@ static void setup_io() {
     }
     gpio = (volatile unsigned *)gpio_map;
 }
+
 static inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
 static inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) { asm(""); } }
-static inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
+static inline void delay_ns(int t_ns, float one_cycle_ns) { int n = (int)((float)t_ns/ (float)one_cycle_ns) - 3; delay_cycles(n); }
 
-static inline int get_one_cycle_ns() {
+static inline float get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
     int gpio_clr[10000] = { 0 };
     int n = 100000;
@@ -55,10 +56,10 @@ static inline int get_one_cycle_ns() {
     delay_cycles(n);
     clock_gettime(CLOCK_MONOTONIC, &t1);
     long int dt = t1.tv_nsec - t0.tv_nsec;
-    int t_cycle = dt / n;
+    float t_cycle = dt / n;
     printf("delay_cycles(%d): %ld ns\n", n, dt);
-    printf("one_cycle: %d ns\n", t_cycle);
-    return dt/n;
+    printf("one_cycle: %f ns\n", t_cycle);
+    return (dt / n);
 }
  
 int main(int argc, char **argv) {
