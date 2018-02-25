@@ -22,10 +22,10 @@ volatile unsigned *gpio;
  
 void setup_io();
 inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
-inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
 inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) {} }
+inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
 
-inline get_one_cycle_ns() {
+inline int get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
     int gpio_clr[10000] = { 0 };
     int n = 100000;
@@ -36,9 +36,9 @@ inline get_one_cycle_ns() {
     delay_cycles(n);
     clock_gettime(CLOCK_MONOTONIC, &t1);
     long int dt = t1.tv_nsec - t0.tv_nsec;
-    long int t_cycle = dt / n;
+    int t_cycle = dt / n;
     printf("delay_cycles(%d): %ld ns\n", n, dt);
-    printf("one_cycle: %ld ns\n", t_cycle);
+    printf("one_cycle: %d ns\n", t_cycle);
     return dt/n;
 }
  
