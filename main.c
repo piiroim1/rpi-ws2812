@@ -21,9 +21,9 @@ volatile unsigned *gpio;
 #define GPIO_PULLCLK0 *(gpio+38)
  
 void setup_io();
-inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
-inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) {} }
-inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
+static inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
+static inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) {} }
+static inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
 
 inline int get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
