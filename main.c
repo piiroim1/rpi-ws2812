@@ -41,14 +41,14 @@ static void setup_io() {
     gpio = (volatile unsigned *)gpio_map;
 }
 static inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
-static inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) {} }
+static inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) { asm(""); } }
 static inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
 
 static inline int get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
     int gpio_clr[10000] = { 0 };
     int n = 100000;
-    printf("timing %d gpio updates...\n", n);
+    printf("timing %d busy cycles...\n", n);
     struct timespec t0;
     struct timespec t1;
     clock_gettime(CLOCK_MONOTONIC, &t0);
