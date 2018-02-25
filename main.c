@@ -56,7 +56,7 @@ static inline float get_one_cycle_ns() {
     delay_cycles(n);
     clock_gettime(CLOCK_MONOTONIC, &t1);
     long int dt = t1.tv_nsec - t0.tv_nsec;
-    float t_cycle = dt / n;
+    float t_cycle = (float)dt / n;
     printf("delay_cycles(%d): %ld ns\n", n, dt);
     printf("one_cycle: %f ns\n", t_cycle);
     return (dt / n);
