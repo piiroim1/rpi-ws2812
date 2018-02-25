@@ -21,22 +21,9 @@ volatile unsigned *gpio;
 #define GPIO_PULLCLK0 *(gpio+38)
  
 void setup_io();
-inline long int get_one_cycle_ns();
 inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
-inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (time_ns / one_cycle_ns - 5); delay_cycles(n); }
+inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
 inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) {} }
-
-int main(int argc, char **argv) {
-  int g,rep;
-  setup_io();
-  for (g=7; g<=11; g++) {
-    INP_GPIO(g);
-    OUT_GPIO(g);
-  }
-  long int t_cycle = get_one_cycle_ns();
-  return 0;
-}
-
 
 inline get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
@@ -55,6 +42,18 @@ inline get_one_cycle_ns() {
     return dt/n;
 }
  
+int main(int argc, char **argv) {
+  int g,rep;
+  setup_io();
+  for (g=7; g<=11; g++) {
+    INP_GPIO(g);
+    OUT_GPIO(g);
+  }
+  long int t_cycle = get_one_cycle_ns();
+  return 0;
+}
+
+
  
 void setup_io() {
     if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
