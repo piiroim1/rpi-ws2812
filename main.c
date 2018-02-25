@@ -20,12 +20,31 @@ volatile unsigned *gpio;
 #define GPIO_PULL *(gpio+37)
 #define GPIO_PULLCLK0 *(gpio+38)
  
-void setup_io();
+static void setup_io() {
+    if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+       printf("can't open /dev/mem \n");
+       exit(-1);
+    }
+    gpio_map = mmap(
+       NULL,
+       BLOCK_SIZE,
+       PROT_READ|PROT_WRITE,
+       MAP_SHARED,
+       mem_fd,
+       GPIO_BASE
+    );
+    close(mem_fd);
+    if (gpio_map == MAP_FAILED) {
+       printf("mmap error %d\n", (int)gpio_map);
+       exit(-1);
+    }
+    gpio = (volatile unsigned *)gpio_map;
+}
 static inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
 static inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) {} }
 static inline void delay_ns(int t_ns, int one_cycle_ns) { int n = (t_ns / one_cycle_ns - 5); delay_cycles(n); }
 
-inline int get_one_cycle_ns() {
+static inline int get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
     int gpio_clr[10000] = { 0 };
     int n = 100000;
@@ -53,25 +72,3 @@ int main(int argc, char **argv) {
   return 0;
 }
 
-
- 
-void setup_io() {
-    if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
-       printf("can't open /dev/mem \n");
-       exit(-1);
-    }
-    gpio_map = mmap(
-       NULL,
-       BLOCK_SIZE,
-       PROT_READ|PROT_WRITE,
-       MAP_SHARED,
-       mem_fd,
-       GPIO_BASE
-    );
-    close(mem_fd);
-    if (gpio_map == MAP_FAILED) {
-       printf("mmap error %d\n", (int)gpio_map);
-       exit(-1);
-    }
-    gpio = (volatile unsigned *)gpio_map;
-}
