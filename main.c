@@ -93,12 +93,19 @@ int main(int argc, char **argv) {
         OUT_GPIO(g);
     }
     long int t_cycle = get_one_cycle_ns();
+    struct timespec t0;
+    struct timespec t1;
+    int n = 20;
     send_res(2, t_cycle);
-    for(int i = 0 ; i < 20; ++i) {
+    clock_gettime(CLOCK_MONOTONIC, &t0);
+    for(int i = 0 ; i < n; ++i) {
         for(int j = 0; j < 24; ++j) {
             send_bits(2, 0, t_cycle);
         }
     }
+    clock_gettime(CLOCK_MONOTONIC, &t1);
+    long int dt = t1.tv_nsec - t0.tv_nsec;
+    printf("update %d leds: %ld ns\n", n, dt);
     return 0;
 }
 
