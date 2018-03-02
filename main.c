@@ -100,7 +100,8 @@ int main(int argc, char **argv) {
     clock_gettime(CLOCK_MONOTONIC, &t0);
     for(int i = 0 ; i < n; ++i) {
         for(int j = 0; j < 24; ++j) {
-            send_bits(2, 0, t_cycle);
+            delay_ns(1250, t_cycle);
+            //send_bits(2, 0, t_cycle);
         }
     }
     clock_gettime(CLOCK_MONOTONIC, &t1);
