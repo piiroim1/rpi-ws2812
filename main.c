@@ -20,6 +20,18 @@ volatile unsigned *gpio;
 #define GPIO_PULL *(gpio+37)
 #define GPIO_PULLCLK0 *(gpio+38)
  
+#define T0H_NS 350
+#define T1H_NS 900
+#define T0L_NS 900
+#define T0H_NS 350
+#define RES_NS 55000
+#define T1_NS (T0H_NS)
+#define T2_NS (T1H_NS)
+#define T3_NS ((T0H_NS) + (T0L_NS))
+#define D1_NS = (T1_NS)
+#define D2_NS = ((T2_NS) - (T1_NS))
+#define D3_NS = ((T3_NS) - (T2_NS))
+
 static void setup_io() {
     if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
        printf("can't open /dev/mem \n");
@@ -41,9 +53,20 @@ static void setup_io() {
     gpio = (volatile unsigned *)gpio_map;
 }
 
-static inline void update(int* gpio_set, int* gpio_clr, int n) { for(int i; i < n; i++) { GPIO_SET = gpio_set[i]; GPIO_CLR = gpio_clr[i]; } }
 static inline void delay_cycles(int n) { for(int i = 0; i < n; ++i) { asm(""); } }
 static inline void delay_ns(int t_ns, float one_cycle_ns) { int n = (int)((float)t_ns/ (float)one_cycle_ns) - 3; delay_cycles(n); }
+static inline void send_bits(int bits, int active, float one_cycle_ns) {
+    GPIO_SET = active;
+    delay_ns(D1_NS, one_cycle_ns);
+    GPIO_CLR = active & !bits;
+    delay_ns(D2_NS, one_cycle_ns);
+    GPIO_CLR = active & bits;
+    delay_ns(D3_NS);
+}
+static inline void send_res(int bits, float one_cycle_ns) {
+    GPIO_CLR = bits;
+    delay_ns(RES_NS, one_cycle_ns);
+}
 
 static inline float get_one_cycle_ns() {
     int gpio_set[10000] = { 0 };
@@ -63,13 +86,20 @@ static inline float get_one_cycle_ns() {
 }
  
 int main(int argc, char **argv) {
-  int g,rep;
-  setup_io();
-  for (g=7; g<=11; g++) {
-    INP_GPIO(g);
-    OUT_GPIO(g);
-  }
-  long int t_cycle = get_one_cycle_ns();
-  return 0;
+    int g,rep;
+    setup_io();
+    for (g=2; g<=2; g++) {
+        INP_GPIO(g);
+        OUT_GPIO(g);
+    }
+    long int t_cycle = get_one_cycle_ns();
+    static int buf_gpio_set = {1}
+    send_res(t_cycle);
+    for(int i = 0 ; i < 20; ++i) {
+        for(int j = 0; j < 24; ++j) {
+            send_bits(1, 0, t_cycle)
+        }
+    }
+    return 0;
 }
 
