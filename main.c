@@ -28,9 +28,9 @@ volatile unsigned *gpio;
 #define T1_NS (T0H_NS)
 #define T2_NS (T1H_NS)
 #define T3_NS ((T0H_NS) + (T0L_NS))
-#define D1_NS = (T1_NS)
-#define D2_NS = ((T2_NS) - (T1_NS))
-#define D3_NS = ((T3_NS) - (T2_NS))
+#define D1_NS (T1_NS)
+#define D2_NS ((T2_NS) - (T1_NS))
+#define D3_NS ((T3_NS) - (T2_NS))
 
 static void setup_io() {
     if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
@@ -61,7 +61,7 @@ static inline void send_bits(int bits, int active, float one_cycle_ns) {
     GPIO_CLR = active & !bits;
     delay_ns(D2_NS, one_cycle_ns);
     GPIO_CLR = active & bits;
-    delay_ns(D3_NS);
+    delay_ns(D3_NS, one_cycle_ns);
 }
 static inline void send_res(int bits, float one_cycle_ns) {
     GPIO_CLR = bits;
@@ -93,11 +93,10 @@ int main(int argc, char **argv) {
         OUT_GPIO(g);
     }
     long int t_cycle = get_one_cycle_ns();
-    static int buf_gpio_set = {1}
-    send_res(t_cycle);
+    send_res(2, t_cycle);
     for(int i = 0 ; i < 20; ++i) {
         for(int j = 0; j < 24; ++j) {
-            send_bits(1, 0, t_cycle)
+            send_bits(2, 0, t_cycle);
         }
     }
     return 0;
